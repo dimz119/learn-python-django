@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'polls/polls_custom.css' %}" />
+<form action="{% url 'polls:survey' %}" method="post">
+    {% csrf_token %}
+    {% comment %} {{ form.as_div }} {% endcomment %}
+
+    {% comment %} {{ form.user_name.label_tag }} {{ form.user_name }}
+    {{ form.user_age.label_tag }} {{ form.user_age }} {% endcomment %}
+
+    {% comment %} <div class="row mb-3">
+        {{ form.user_name.errors }}
+        <label class="col-sm-2 col-form-label" for="{{ form.user_name.id_for_label }}">User name:</label>
+        <div class="col-sm-10">
+            {{ form.user_name }}
+        </div>
+
+        <label class="col-sm-2 col-form-label" for="{{ form.user_age.id_for_label }}">User age:</label>
+        <div class="col-sm-10">
+            {{ form.user_age }}
+        </div>
+    </div> {% endcomment %}
+
+    {% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.label_tag }} {{ field }}
+        {{ field.errors }}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <div class="col-12">
+        <input type="submit" value="Submit" class="btn btn-primary">
+    </div>
+</form>
+{% endblock content %}

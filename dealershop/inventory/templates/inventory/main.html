@@ -1,0 +1,7 @@
+<h1>Welcome to {{ name }}'s inventory main view</h1>
+{% if user.is_authenticated %}
+    <p>You are logged in as  {{ user.get_username }}</p>
+    <p><a href="{% url 'account_logout' %}?next={{request.path}}">Log out</a></p>
+{% else %}
+    You are not logged in yet! Please login by clicking <a href="{% url 'account_login' %}?next={{request.path}}">here</a>
+{% endif %}
