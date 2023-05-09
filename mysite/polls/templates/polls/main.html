@@ -7,6 +7,29 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+    <h1>{{ greetings|lower }}</h1>
+    <h2>I am from {{ location.city }}, {{ location.country }}</h2>
+    <h2>I speak {{ languages.0 }} and {{ languages.1 }}</h2>
+    <ul>
+    {% for lang in languages %}
+        <li>{{ lang }}</li>
+    {% endfor %}
+
+    {% for lang in languages %}
+        <li>
+            {% if lang == "Korean" %}
+            Wow! You speak Korean!
+            {% else %}
+            Alright, You speak English!
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+
+    <ul>
+        {% for k, v in location.items %}
+            <li>{{ k|capfirst }}: {{ v }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>

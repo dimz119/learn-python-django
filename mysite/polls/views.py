@@ -10,7 +10,15 @@ def index(request):
     #     reverse('detail', args=[1]))
     # return HttpResponseRedirect(
     #     reverse('detail', kwargs={'question_id': 1}))
-    return render(request, 'polls/main.html', context={})
+    ctx = {
+        "greetings": "Hello there!",
+        "location": {
+            "city": "Seoul",
+            "country": "South Korea"
+        },
+        "languages": ["Korean", "English"]
+    }
+    return render(request, 'polls/main.html', context=ctx)
 
 
 def detail(request, question_id):
