@@ -24,3 +24,5 @@ urlpatterns = [
 ]
 
 handler404 = 'mysite.views.error_404_view'
+
+handler500 = 'mysite.views.error_500_view'
