@@ -17,3 +17,5 @@ RUN pip install -r requirements.txt
 RUN if [ $DEV = true ]; then pip install -r requirements.dev.txt; fi
 
 EXPOSE 8000
+
+CMD ["gunicorn", "-b", "0.0.0.0:8000", "app.wsgi"]
