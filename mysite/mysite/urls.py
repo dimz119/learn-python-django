@@ -22,3 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
 ]
+
+handler404 = 'mysite.views.error_404_view'
