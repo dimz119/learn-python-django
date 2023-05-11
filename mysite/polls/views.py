@@ -4,6 +4,7 @@ from django.http import (
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+from polls.forms import SurveyForm
 from django.template import loader
 from polls.models import(
     Choice,
@@ -77,3 +78,29 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+def survey(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = SurveyForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+
+            print(form.cleaned_data['user_name'])
+            print(form.cleaned_data['user_age'])
+
+            return HttpResponseRedirect(reverse('polls:thanks'))
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = SurveyForm()
+
+    # return render(request, 'polls/survey.html', {'form': form})
+    return render(request, 'polls/survey_custom.html', {'form': form})
+
+def thanks(request):
+    return render(request, 'polls/thanks.html', {})
