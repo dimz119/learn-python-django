@@ -8,6 +8,7 @@ from polls.forms import SurveyForm
 from django.template import loader
 from polls.models import(
     Choice,
+    Survey,
     Question
 )
 
@@ -90,8 +91,14 @@ def survey(request):
             # ...
             # redirect to a new URL:
 
-            print(form.cleaned_data['user_name'])
-            print(form.cleaned_data['user_age'])
+            # # update
+            # survey = Survey.objects.get(pk=1)
+            # form = SurveyForm(request.POST, instance=survey)
+
+            form.save()
+
+            # print(form.cleaned_data['user_name'])
+            # print(form.cleaned_data['user_age'])
 
             return HttpResponseRedirect(reverse('polls:thanks'))
 
