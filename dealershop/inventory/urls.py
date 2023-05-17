@@ -7,6 +7,7 @@ app_name = 'inventory'
 
 urlpatterns = [
     path('', views.MainView.as_view(), name='main'),
+    path('fbv', views.fbv_view, name='fbv'),
     # path('car/', views.CarFormView.as_view(), name='car'),
     path('create_car/', views.CarCreateView.as_view(), name='car-create'),
     path('list_car/', views.CarListView.as_view(), name='car-list'),

@@ -1,6 +1,21 @@
 from django.http import HttpResponse
 from django.views import View
 from django.views.generic import TemplateView
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
+
+@login_required
+def fbv_view(request):
+    context = {
+        "name": "Joon"
+    }
+    return render(request, 'inventory/fbv.html', context)
+
+# class MainView(View):
+#     def get(self, request):
+#         # <view logic>
+#         return HttpResponse('result')
 
 class MainView(TemplateView):
     template_name = "inventory/main.html"
