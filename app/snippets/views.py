@@ -11,13 +11,28 @@ from rest_framework.response import Response
 from rest_framework import mixins
 from rest_framework import generics
 
+from snippets.serializers import UserSerializer
+from django.contrib.auth.models import User
+from rest_framework import permissions
+from snippets.permissions import IsOwnerOrReadOnly
+
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
 class SnippetList(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
+    # adding required permissions
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     # override this in order to save owner information from incoming request
     def perform_create(self, serializer):
@@ -27,6 +42,9 @@ class SnippetList(generics.ListCreateAPIView):
 class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
+    # adding required permissions
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+
 
 
 # class SnippetList(mixins.ListModelMixin,
