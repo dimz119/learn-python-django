@@ -26,3 +26,12 @@ services:
     command: celery --app=worker worker -l INFO
     depends_on:
       - redis
+
+  celery-standalone:
+    build:
+      context: standalone_celery
+    volumes:
+      - ./standalone_celery:/app
+    command: celery --app=main worker -l INFO
+    depends_on:
+      - redis
