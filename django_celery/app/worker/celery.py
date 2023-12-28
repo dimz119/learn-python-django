@@ -15,6 +15,26 @@ app = Celery('worker') # type: ignore
 #   should have a `CELERY_` prefix.
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
+app.conf.update(
+    task_routes = {
+        'worker.tasks.dumb': {
+            'queue': 'queue1'
+        },
+        'worker.tasks.add': {
+            'queue': 'queue2'
+        }
+    },
+)
+
+# app.conf.task_routes = {
+#     'worker.tasks.dumb': {
+#         'queue': 'queue1'
+#     },
+#     'worker.tasks.add': {
+#         'queue': 'queue2'
+#     }
+# }
+
 # Load task modules from all registered Django apps.
 app.autodiscover_tasks()
 """
