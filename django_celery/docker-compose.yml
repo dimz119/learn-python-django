@@ -23,15 +23,15 @@ services:
       context: .
     volumes:
       - ./app:/app
-    command: celery --app=worker worker -l INFO -Q queue1
+    command: celery --app=worker worker -l INFO -Q celery,celery:1,celery:2
     depends_on:
       - redis
 
-  celery-standalone:
-    build:
-      context: standalone_celery
-    volumes:
-      - ./standalone_celery:/app
-    command: celery --app=main worker -l INFO -Q queue2
-    depends_on:
-      - redis
+  # celery-standalone:
+  #   build:
+  #     context: standalone_celery
+  #   volumes:
+  #     - ./standalone_celery:/app
+  #   command: celery --app=main worker -l INFO -Q queue2
+  #   depends_on:
+  #     - redis
