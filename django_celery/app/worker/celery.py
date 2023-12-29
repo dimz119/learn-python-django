@@ -18,10 +18,10 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.conf.update(
     task_routes = {
         'worker.tasks.dumb': {
-            'queue': 'queue1'
+            'queue': 'celery'
         },
         'worker.tasks.add': {
-            'queue': 'queue2'
+            'queue': 'celery'
         }
     },
 )
