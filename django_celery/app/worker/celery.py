@@ -26,6 +26,9 @@ app.conf.update(
     },
 )
 
+# Rate limiting
+app.conf.task_default_rate_limit = '5/m'  # 5 tasks per minute
+
 # Redis specific
 # https://docs.celeryq.dev/en/stable/userguide/routing.html#redis-message-priorities
 app.conf.broker_transport_options = {

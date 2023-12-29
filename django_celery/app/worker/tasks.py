@@ -1,7 +1,7 @@
 import time
 from celery import shared_task
 
-@shared_task(queue='celery')
+@shared_task(queue='celery', rate_limit='1/m')
 def add(x, y):
     return x + y
 
