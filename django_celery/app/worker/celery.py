@@ -1,6 +1,7 @@
 import os
-
 from celery import Celery
+from celery.schedules import crontab
+from datetime import timedelta
 
 # Reference: https://docs.celeryq.dev/en/stable/django/first-steps-with-django.html
 
@@ -61,6 +62,23 @@ looking for all the tasks like below:
     - models.py
 """
 
+# Periodic task & Cron Table
+app.conf.beat_schedule = {
+    'add-every-5-seconds': {
+        'task': 'worker.tasks.add',
+        'schedule': timedelta(seconds=5),
+        'args': (10, 10),
+        # 'kwargs': {"key": "value"},
+        # 'options': {
+        #     'queue': 'celery'
+        # }
+    },
+    'add-every-minute': {
+        'task': 'worker.tasks.add',
+        'schedule': crontab(minute='*'),
+        'args': (20, 20)
+    },
+}
 
 @app.task(bind=True, ignore_result=True)
 def debug_task(self):

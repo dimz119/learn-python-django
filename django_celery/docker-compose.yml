@@ -23,7 +23,9 @@ services:
       context: .
     volumes:
       - ./app:/app
-    command: celery --app=worker worker -l INFO -Q celery,celery:1,celery:2
+    # Note that -B is for development purpose, for production, you need to have seperate process to run the beat
+    # https://docs.celeryq.dev/en/stable/userguide/periodic-tasks.html#starting-the-scheduler
+    command: celery --app=worker worker -l INFO -Q celery,celery:1,celery:2 -B
     depends_on:
       - redis
 
