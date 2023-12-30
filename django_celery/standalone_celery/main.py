@@ -12,13 +12,13 @@ app = Celery('worker',
 
 app.conf.task_routes = {
     'worker.tasks.add': {
-        'queue': 'queue2'
+        'queue': 'celery3'
     },
     'worker.tasks.mul': {
-        'queue': 'queue2'
+        'queue': 'celery3'
     },
     'worker.tasks.xsum': {
-        'queue': 'queue2'
+        'queue': 'celery3'
     }
 }
 

@@ -27,11 +27,21 @@ services:
     depends_on:
       - redis
 
-  # celery-standalone:
-  #   build:
-  #     context: standalone_celery
-  #   volumes:
-  #     - ./standalone_celery:/app
-  #   command: celery --app=main worker -l INFO -Q queue2
-  #   depends_on:
-  #     - redis
+  flower:
+    image: mher/flower:2.0.1
+    ports:
+      - "5555:5555"
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+    depends_on:
+      - celery
+      - celery-standalone
+
+  celery-standalone:
+    build:
+      context: standalone_celery
+    volumes:
+      - ./standalone_celery:/app
+    command: celery --app=main worker -l INFO -Q celery3,celery:4,celery:5
+    depends_on:
+      - redis

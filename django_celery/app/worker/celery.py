@@ -33,7 +33,7 @@ app.conf.task_default_rate_limit = '5/m'  # 5 tasks per minute
 # https://docs.celeryq.dev/en/stable/userguide/routing.html#redis-message-priorities
 app.conf.broker_transport_options = {
     'priority_steps': list(range(10)), # default is 4
-    'sep': ':',
+    # 'sep': ':',
     'queue_order_strategy': 'priority',
 }
 """
