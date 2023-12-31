@@ -8,7 +8,8 @@ def print_result(x, y, msg=None):
         return f"{msg}: {total}"
     return total
 
-@shared_task(queue='celery', rate_limit='1/m')
+# @shared_task(queue='celery', rate_limit='1/m')
+@shared_task(queue='celery')
 def add(x, y):
     return x + y
 

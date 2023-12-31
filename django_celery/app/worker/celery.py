@@ -62,23 +62,23 @@ looking for all the tasks like below:
     - models.py
 """
 
-# Periodic task & Cron Table
-app.conf.beat_schedule = {
-    'add-every-5-seconds': {
-        'task': 'worker.tasks.add',
-        'schedule': timedelta(seconds=5),
-        'args': (10, 10),
-        # 'kwargs': {"key": "value"},
-        # 'options': {
-        #     'queue': 'celery'
-        # }
-    },
-    'add-every-minute': {
-        'task': 'worker.tasks.add',
-        'schedule': crontab(minute='*'),
-        'args': (20, 20)
-    },
-}
+# # Periodic task & Cron Table
+# app.conf.beat_schedule = {
+#     'add-every-5-seconds': {
+#         'task': 'worker.tasks.add',
+#         'schedule': timedelta(seconds=5),
+#         'args': (10, 10),
+#         # 'kwargs': {"key": "value"},
+#         # 'options': {
+#         #     'queue': 'celery'
+#         # }
+#     },
+#     'add-every-minute': {
+#         'task': 'worker.tasks.add',
+#         'schedule': crontab(minute='*'),
+#         'args': (20, 20)
+#     },
+# }
 
 @app.task(bind=True, ignore_result=True)
 def debug_task(self):

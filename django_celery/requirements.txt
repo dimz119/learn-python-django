@@ -70,3 +70,6 @@ vine==5.1.0
 wcwidth==0.2.12
 wsproto==1.2.0
 zope.interface==6.0
+django-celery-beat==2.5.0
+django-celery-results==2.5.1
+psycopg2==2.9.9
